@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.4.0
+    restart: always
+    container_name: db-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=<password> # Contraseña de root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./config/mysql/:/docker-entrypoint-initdb.d
+      - ./data/mysql:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
+
+  apache:
+    image: php:8.2-apache
+    restart: always
+    container_name: apache
+    command: /bin/sh -c "apt-get update && apt-get upgrade -y && apt-get install -y libicu-dev && docker-php-ext-install mysqli && docker-php-ext-install intl && apache2-foreground"
+    ports:
+      - 80:80
+    volumes:
+      - ./src/:/var/www/html
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./config/vhosts:/etc/apache2/sites-enabled
+      - ./logs/apache2/:/var/log/apache2
+    links:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    restart: always
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=<host> # Host de BBDD
+      # - PMA_USER=<usuario> # Usuario phpMyAdmin
+      # - PMA_PASSWORD=<password> # Contraseña phpMyAdmin
+    ports:
+      - '8008:80'
