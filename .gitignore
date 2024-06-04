@@ -1,0 +1,6 @@
+config/
+logs/
+data/
+
+!.gitignore
+!.gitkeep
