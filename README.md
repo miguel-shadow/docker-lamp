@@ -1,3 +1,5 @@
+[docker-compose.yml]: /docker-compose.yml
+
 [config]: /config
 [config/default]: /config/default
 [config/mysql]: /config/mysql
@@ -24,7 +26,7 @@
     - [2.2. MySQL](#22-mysql)
     - [2.3. PHP](#23-php)
     - [2.4. phpMyAdmin](#24-phpmyadmin)
-- [3. Añadir archivos](#3-añadir-archivos)
+- [3. Añadir archivos WEB](#3-añadir-archivos-web)
 - [4. Ejecutar](#4-ejecutar)
 
 
@@ -49,7 +51,7 @@ Permite levantar rápidamente un servidor WEB Apache con PHP, MySQL y phpMyAdmin
 En [config/vhosts] se puede modificar los `sites-enabled` del servidor Apache. ***\*Se debe crear el archivo***
 
 ## 2.2. MySQL
-- Modificar la variable de entorno `MYSQL_ROOT_PASSWORD` (**\<password\>**) para establecer la contraseña del usuario **root**
+- Modificar la variable de entorno `MYSQL_ROOT_PASSWORD` (**\<password\>**) en [docker-compose.yml] para establecer la contraseña del usuario **root**
 
 ## 2.3. PHP
 En [config/php] se puede modificar el archivo. Recomendable copiar el contenido de [config/default/php/php.ini-development] o [config/default/php/php.ini-production] en [config/php/php.ini] y modificar las variables que se deseen, por ejemplo:
@@ -65,12 +67,12 @@ En [config/php] se puede modificar el archivo. Recomendable copiar el contenido 
 
 
 ## 2.4. phpMyAdmin
-- Modificar las variables de entorno
+- Modificar las variables de entorno en [docker-compose.yml]
     - `PMA_HOST`: Host de la BBDD (En este ejemplo **db**)
     - `PMA_USER`: Usuario phpMyAdmin (Descomentar la línea y modificar `<usuario>`)
     - `PMA_PASSWORD`: Contrasñea del usuario phpMyAdmin (Descomentar la línea y modificar `<password>`)
 
-# 3. Añadir archivos
+# 3. Añadir archivos WEB
 Para añadir los **archivos web**, almacenarlos en [src]
 
 # 4. Ejecutar
